@@ -10,7 +10,7 @@ export default {
     GRAY_600: '#333638',
     GRAY_700: '#1B1D1E',
 
-    GREEN_100: '#E5F0D8',
+    GREEN_100: '#E5F0DB',
     GREEN_300: '#CBE4B4',
     GREEN_700: '#639339',
 
