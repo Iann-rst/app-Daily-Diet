@@ -3,7 +3,7 @@ export default {
     WHITE: '#FFFFFF',
 
     GRAY_100: '#FAFAFA',
-    GRAY_200: '#DDDEDF',
+    GRAY_200: '#EFF0F0',
     GRAY_300: '#DDDEDF',
     GRAY_400: '#B9BBBC',
     GRAY_500: '#5C6265',
@@ -30,6 +30,6 @@ export default {
     MD: 16,
     LG: 18,
     XL: 24,
-    XL2: 32
+    '2XL': 32
   }
 }
