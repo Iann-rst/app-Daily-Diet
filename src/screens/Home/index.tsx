@@ -18,12 +18,16 @@ import { Button } from "@components/Button";
 import { useTheme } from "styled-components/native";
 import { MealCard } from "@components/MealCard";
 import { FlatList, Text } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 
 /* Fazer a FlatList para listar os dias e as refeições de cada dia */
 
 export function Home() {
   const { COLORS } = useTheme();
+  const { navigate } = useNavigation();
+
+
   const meals = [
     {
       date: '12/03/2023',
@@ -60,6 +64,10 @@ export function Home() {
 
   const onTheDiet = true;
 
+  function handleShowStatistic() {
+    navigate("statistic");
+  }
+
   return (
     <Container>
       <Header>
@@ -68,7 +76,7 @@ export function Home() {
       </Header>
 
       <StatCard type={onTheDiet}>
-        <StatCardButton onPress={() => console.log("Cliquei")}>
+        <StatCardButton onPress={handleShowStatistic}>
           <StatCardButtonIcon color={onTheDiet ? COLORS.GREEN_700 : COLORS.RED_700} />
         </StatCardButton>
         <StatCardTitle>90,86%</StatCardTitle>
