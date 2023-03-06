@@ -81,3 +81,12 @@ export const TitleMeals = styled.Text`
   `}
   margin-bottom: 8px;
 `;
+
+export const TitleListMeals = styled.Text`
+${({ theme }) => css`
+    color: ${theme.COLORS.GRAY_700};
+    font-family: ${theme.FONT_FAMILY.BOLD};
+    font-size: ${theme.FONT_SIZE.LG}px;
+  `}
+  margin-bottom: 8px;
+`;
