@@ -1,17 +1,16 @@
 import { TextInputProps } from "react-native";
-import { Container, InputText, Label } from "./styles";
+import { Container, InputStyleProps, InputText, Label } from "./styles";
 
 type Props = TextInputProps & {
   label: string;
-  input_type_2?: boolean;
-  textArea?: boolean;
+  type?: InputStyleProps;
 }
 
-export function Input({ label, input_type_2, textArea = false, ...rest }: Props) {
+export function Input({ label, type = "DEFAULT", ...rest }: Props) {
   return (
-    <Container style={input_type_2 && { width: '48%' }}>
+    <Container type={type}>
       <Label>{label}</Label>
-      <InputText textArea={textArea} {...rest} />
+      <InputText type={type} {...rest} />
     </Container>
   )
 }

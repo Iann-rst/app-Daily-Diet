@@ -19,13 +19,13 @@ export function NewMeal() {
       <Content>
         <Form>
           <Input label="Nome" />
-          <Input label="Descrição" textArea textAlignVertical="top" />
+          <Input label="Descrição" type="PRIMARY" textAlignVertical="top" />
           <View style={{
             flexDirection: 'row', justifyContent: 'space-between'
           }}
           >
-            <Input label="Data" input_type_2 />
-            <Input label="Hora" input_type_2 />
+            <Input label="Data" type="SECONDARY" />
+            <Input label="Hora" type="SECONDARY" />
           </View>
         </Form>
         <Button title="Cadastrar refeição" />
