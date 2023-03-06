@@ -8,7 +8,8 @@ import {
   StatCard,
   StatCardSubTitle,
   StatCardTitle,
-  TitleMeals
+  TitleMeals,
+  TitleListMeals
 } from "./styles";
 
 import LogoImg from '@assets/logo.png'
@@ -16,12 +17,46 @@ import AvatarImg from '@assets/avatar.png';
 import { Button } from "@components/Button";
 import { useTheme } from "styled-components/native";
 import { MealCard } from "@components/MealCard";
+import { FlatList, Text } from "react-native";
 
 
 /* Fazer a FlatList para listar os dias e as refeições de cada dia */
 
 export function Home() {
   const { COLORS } = useTheme();
+  const meals = [
+    {
+      date: '12/03/2023',
+      meal: [
+        {
+          id: '1',
+          hour: '20:00',
+          name: 'Sanduíche',
+          description: 'Sanduíche de pão integral com salada de alface e tomate',
+          isDiet: true
+        },
+        {
+          id: '2',
+          hour: '19:00',
+          name: 'X-tudo',
+          description: 'Sanduíche de pão integral com salada de alface e tomate',
+          isDiet: false
+        }
+      ]
+    },
+    {
+      date: '13/03/2023',
+      meal: [
+        {
+          id: '1',
+          hour: '16:00',
+          name: 'X-tudo',
+          description: 'X-tudo de frango',
+          isDiet: false
+        }
+      ]
+    }
+  ]
 
   const onTheDiet = true;
 
@@ -41,13 +76,24 @@ export function Home() {
       </StatCard>
 
       <TitleMeals>Refeições</TitleMeals>
-      <Button title="Nova refeição" icon="plus" />
+      <Button style={{ marginBottom: 32 }} title="Nova refeição" icon="plus" />
 
-      <MealCard type="SECONDARY" hour="20:00" title="X-tudo" />
-      <MealCard type="SECONDARY" hour="20:00" title="Lasanha de frango com queijo" />
-      <MealCard hour="16:00" title="Whey protein com leite" />
-      <MealCard hour="12:30" title="Salada cesar com frango grelhado" />
-      <MealCard hour="12:30" title="Vitamina de banana com abacate" />
+      <FlatList
+        data={meals}
+        keyExtractor={item => item.date}
+        renderItem={({ item }) => (
+          <>
+            <TitleListMeals>{item.date.replaceAll('/', '.')}</TitleListMeals>
+            <FlatList
+              data={item.meal}
+              keyExtractor={meal => meal.id}
+              renderItem={({ item }) => (
+                <MealCard hour={item.hour} title={item.name} type={item.isDiet === true ? 'PRIMARY' : 'SECONDARY'} />
+              )}
+            />
+          </>
+        )}
+      />
 
     </Container>
   )
