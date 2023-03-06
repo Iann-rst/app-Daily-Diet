@@ -2,8 +2,8 @@ import { StatusBar } from 'react-native';
 import { ThemeProvider } from 'styled-components/native';
 import { NunitoSans_400Regular, NunitoSans_700Bold, useFonts } from '@expo-google-fonts/nunito-sans'
 import theme from '@theme/index';
-import { Home } from '@screens/Home';
 import { Loading } from '@components/Loading';
+import { Routes } from '@routes/index';
 
 
 export default function App() {
@@ -20,7 +20,7 @@ export default function App() {
         backgroundColor="transparent"
         translucent
       />
-      {fontsLoaded ? <Home /> : <Loading />}
+      {fontsLoaded ? <Routes /> : <Loading />}
     </ThemeProvider>
   );
 }
