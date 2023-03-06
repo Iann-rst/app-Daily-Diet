@@ -1,14 +1,14 @@
 import { TouchableOpacity } from 'react-native';
 import { ArrowUpRight } from 'phosphor-react-native';
 import styled, { css } from 'styled-components/native'
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 type StatCardTypeStylesProps = {
   type: boolean
 }
 
-
-export const Container = styled.View`
+export const Container = styled(SafeAreaView)`
   flex: 1;
   padding: 24px;
   background-color: ${({ theme }) => theme.COLORS.GRAY_100};

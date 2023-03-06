@@ -1,13 +1,14 @@
 import { ArrowLeft } from "phosphor-react-native";
 import { TouchableOpacity } from "react-native";
 import { View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import styled, { css } from "styled-components/native";
 
 export type HeaderStyleProps = {
   isDiet: boolean;
 }
 
-export const Container = styled(View) <HeaderStyleProps>`
+export const Container = styled(SafeAreaView) <HeaderStyleProps>`
   width: 100%;
   height: 200px;
   padding: 24px;
