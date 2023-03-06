@@ -1,5 +1,6 @@
 import { Header } from "@components/Header";
 import { StatsCard } from "@components/StatsCard";
+import { useNavigation } from "@react-navigation/native";
 import { Content, InfoMeals, InfoMealsSubTitle, InfoMealsTitle, InfoView, Title } from "./styles";
 
 type Props = {
@@ -12,9 +13,16 @@ type Props = {
 
 
 export function Statistic() {
+
+  const { navigate } = useNavigation();
+
+  function handleGoBack() {
+    navigate("home");
+  }
+
   return (
     <>
-      <Header isDiet={false} />
+      <Header goBack={handleGoBack} isDiet={false} />
       <Content style={{ marginTop: -32 }}>
         <Title>Estatística gerais</Title>
         <StatsCard title="22" subTitle="melhor sequência de pratos dentro da dieta" />
