@@ -68,6 +68,10 @@ export function Home() {
     navigate("statistic");
   }
 
+  function handleCreateNewMeal() {
+    navigate("newMeal")
+  }
+
   return (
     <Container>
       <Header>
@@ -84,7 +88,7 @@ export function Home() {
       </StatCard>
 
       <TitleMeals>Refeições</TitleMeals>
-      <Button style={{ marginBottom: 32 }} title="Nova refeição" icon="plus" />
+      <Button onPress={handleCreateNewMeal} style={{ marginBottom: 32 }} title="Nova refeição" icon="plus" />
 
       <FlatList
         data={meals}
