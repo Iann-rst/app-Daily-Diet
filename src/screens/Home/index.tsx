@@ -17,7 +17,7 @@ import AvatarImg from '@assets/avatar.png';
 import { Button } from "@components/Button";
 import { useTheme } from "styled-components/native";
 import { MealCard } from "@components/MealCard";
-import { FlatList, Text } from "react-native";
+import { SectionList } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 
@@ -27,11 +27,10 @@ export function Home() {
   const { COLORS } = useTheme();
   const { navigate } = useNavigation();
 
-
   const meals = [
     {
-      date: '12/03/2023',
-      meal: [
+      title: '12/03/2023',
+      data: [
         {
           id: '1',
           hour: '20:00',
@@ -45,12 +44,19 @@ export function Home() {
           name: 'X-tudo',
           description: 'Sanduíche de pão integral com salada de alface e tomate',
           isDiet: false
+        },
+        {
+          id: '3',
+          hour: '19:00',
+          name: 'Shake de Banana',
+          description: 'Vitamina concentrada de banana',
+          isDiet: true
         }
       ]
     },
     {
-      date: '13/03/2023',
-      meal: [
+      title: '14/03/2023',
+      data: [
         {
           id: '1',
           hour: '16:00',
@@ -94,26 +100,23 @@ export function Home() {
       <TitleMeals>Refeições</TitleMeals>
       <Button onPress={handleCreateNewMeal} style={{ marginBottom: 32 }} title="Nova refeição" icon="plus" />
 
-      <FlatList
-        data={meals}
-        keyExtractor={item => item.date}
-        renderItem={({ item }) => (
-          <>
-            <TitleListMeals>{item.date.replaceAll('/', '.')}</TitleListMeals>
-            <FlatList
-              data={item.meal}
-              keyExtractor={meal => meal.id}
-              renderItem={({ item }) => (
-                <MealCard
-                  hour={item.hour}
-                  title={item.name}
-                  type={item.isDiet === true ? 'PRIMARY' : 'SECONDARY'}
-                  onPress={() => handleShowDetailsMeals(item.id)} />
-              )}
-            />
-          </>
+      <SectionList
+        sections={meals}
+        keyExtractor={(meal) => meal.id}
+        renderItem={({ item: meal }) => (
+          <MealCard
+            title={meal.name}
+            hour={meal.hour}
+            type={meal.isDiet === true ? 'PRIMARY' : 'SECONDARY'}
+            onPress={() => handleShowDetailsMeals(meal.id)}
+          />
         )}
+        renderSectionHeader={({ section: { title } }) => (
+          <TitleListMeals>{title}</TitleListMeals>
+        )}
+        showsVerticalScrollIndicator={false}
       />
+
 
     </Container>
   )
