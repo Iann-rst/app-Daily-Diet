@@ -72,6 +72,10 @@ export function Home() {
     navigate("newMeal")
   }
 
+  function handleShowDetailsMeals(id: string) {
+    navigate("detailsMeal", { id })
+  }
+
   return (
     <Container>
       <Header>
@@ -100,7 +104,11 @@ export function Home() {
               data={item.meal}
               keyExtractor={meal => meal.id}
               renderItem={({ item }) => (
-                <MealCard hour={item.hour} title={item.name} type={item.isDiet === true ? 'PRIMARY' : 'SECONDARY'} />
+                <MealCard
+                  hour={item.hour}
+                  title={item.name}
+                  type={item.isDiet === true ? 'PRIMARY' : 'SECONDARY'}
+                  onPress={() => handleShowDetailsMeals(item.id)} />
               )}
             />
           </>
