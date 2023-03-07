@@ -1,7 +1,15 @@
 import { Header } from "@components/Header";
 import { StatsCard } from "@components/StatsCard";
 import { useNavigation } from "@react-navigation/native";
-import { Content, InfoMeals, InfoMealsSubTitle, InfoMealsTitle, InfoView, Title } from "./styles";
+import {
+  Container,
+  Content,
+  InfoMeals,
+  InfoMealsSubTitle,
+  InfoMealsTitle,
+  InfoView,
+  Title
+} from "./styles";
 
 type Props = {
   isDiet: boolean;
@@ -21,8 +29,8 @@ export function Statistic() {
   }
 
   return (
-    <>
-      <Header goBack={handleGoBack} isDiet={false} />
+    <Container>
+      <Header goBack={handleGoBack} isDiet={true} />
       <Content style={{ marginTop: -32 }}>
         <Title>Estatística gerais</Title>
         <StatsCard title="22" subTitle="melhor sequência de pratos dentro da dieta" />
@@ -39,6 +47,6 @@ export function Statistic() {
           </InfoMeals>
         </InfoView>
       </Content>
-    </>
+    </Container>
   )
 }

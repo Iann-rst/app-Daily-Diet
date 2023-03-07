@@ -7,6 +7,10 @@ type Props = {
   type: InfoDietStyleProps;
 }
 
+export const Container = styled.View`
+  flex: 1;
+`;
+
 export const Content = styled.View`
   flex: 1;
   background-color: ${({ theme }) => theme.COLORS.WHITE};
