@@ -17,14 +17,20 @@ export function NewMeal() {
   const [description, setDescription] = useState('')
   const [date, setDate] = useState('');
   const [hour, setHour] = useState('');
-  const [diet, setDiet] = useState<boolean | ''>('');
+  const [isDiet, setIsDiet] = useState<boolean | ''>('');
 
   function handleGoBack() {
     navigate("home")
   }
 
   function handleCreateNewMeal() {
-    if (name.trim().length === 0 || description.trim().length === 0 || date.trim().length === 0 || hour.trim().length === 0 || diet.valueOf().toString().trim().length === 0) {
+    if (
+      name.trim().length === 0 ||
+      description.trim().length === 0 ||
+      date.trim().length === 0 ||
+      hour.trim().length === 0 ||
+      isDiet.valueOf().toString().trim().length === 0
+    ) {
       return Alert.alert("Nova Refeição", "Preencha todos os campos!");
     }
 
@@ -32,8 +38,11 @@ export function NewMeal() {
     console.log("Description =>", description);
     console.log("Hour =>", hour);
     console.log("Date =>", date);
-    console.log("Diet =>", diet);
+    console.log("Diet =>", isDiet);
 
+    navigate("feedback", {
+      type: isDiet ? true : false
+    })
   }
 
   return (
@@ -54,15 +63,15 @@ export function NewMeal() {
           <Groups style={{ gap: 8 }}>
             <Filter
               title="Sim"
-              isActive={diet === true}
-              onPress={() => setDiet(true)}
+              isActive={isDiet === true}
+              onPress={() => setIsDiet(true)}
             />
 
             <Filter
               title="Não"
               diet="NO"
-              isActive={diet === false}
-              onPress={() => setDiet(false)}
+              isActive={isDiet === false}
+              onPress={() => setIsDiet(false)}
             />
           </Groups>
 
