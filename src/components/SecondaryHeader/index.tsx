@@ -1,14 +1,15 @@
 import { View } from "react-native";
-import { BackButton, BackIcon, Container, Title } from "./styles";
+import { BackButton, BackIcon, Container, DietStyleProps, Title } from "./styles";
 
 type Props = {
   title: string;
   goBack: () => void;
+  type?: DietStyleProps;
 }
 
-export function SecondaryHeader({ title, goBack }: Props) {
+export function SecondaryHeader({ title, goBack, type = "DEFAULT" }: Props) {
   return (
-    <Container>
+    <Container type={type}>
       <BackButton onPress={goBack}>
         <BackIcon />
       </BackButton>

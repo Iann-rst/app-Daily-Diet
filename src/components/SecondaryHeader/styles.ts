@@ -3,12 +3,28 @@ import { TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import styled, { css } from "styled-components/native";
 
-export const Container = styled(SafeAreaView)`
+export type DietStyleProps = 'DEFAULT' | 'IN' | 'OUT';
+
+type Props = {
+  type: DietStyleProps;
+}
+
+export const Container = styled(SafeAreaView) <Props>`
   width: 100%;
   height: 132px;
   padding: 24px;
 
-  background-color: ${({ theme }) => theme.COLORS.GRAY_300};
+  ${({ theme, type }) => type === 'IN' && css`
+    background-color: ${theme.COLORS.GREEN_100};
+  `}
+
+  ${({ theme, type }) => type === 'OUT' && css`
+    background-color: ${theme.COLORS.RED_100};
+  `}
+
+  ${({ theme, type }) => type === 'DEFAULT' && css`
+    background-color: ${theme.COLORS.GRAY_300};
+  `}
 
   flex-direction: row;
   align-items: center;
