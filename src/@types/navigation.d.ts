@@ -6,6 +6,9 @@ export declare global {
       newMeal: undefined;
       detailsMeal: {
         id: string;
+      };
+      feedback: {
+        type: boolean;
       }
     }
   }
