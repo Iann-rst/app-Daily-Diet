@@ -4,6 +4,9 @@ export declare global {
       home: undefined;
       statistic: undefined;
       newMeal: undefined;
+      detailsMeal: {
+        id: string;
+      }
     }
   }
 }
