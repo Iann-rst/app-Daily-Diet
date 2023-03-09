@@ -23,6 +23,9 @@ export function DetailsMeal() {
     navigate("home");
   }
 
+  function handleGoEditMeal() {
+    navigate("editMeal", { id })
+  }
   async function fetchDetailsMeal() {
     // console.log("Pegar os detalhes da refeição: ", id)
     try {
@@ -79,7 +82,7 @@ export function DetailsMeal() {
         </Tag>
       </Content>
       <Footer>
-        <Button icon="pencil" title="Editar refeição" />
+        <Button icon="pencil" title="Editar refeição" onPress={handleGoEditMeal} />
         <Button icon="trash" type="SECONDARY" title="Excluir refeição" onPress={handleRemoveMeal} />
       </Footer>
     </Container>
