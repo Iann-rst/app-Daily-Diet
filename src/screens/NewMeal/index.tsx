@@ -1,6 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import { Alert, Keyboard } from "react-native";
+import uuid from "react-native-uuid";
 
 import { Button } from "@components/Button";
 import { Filter } from "@components/Filter";
@@ -9,6 +10,8 @@ import { SecondaryHeader } from "@components/SecondaryHeader";
 
 
 import { Form, Content, LabelDiet, Container, Groups } from "./styles";
+import { Meal } from "@storage/storageConfig";
+import { createNewMeals } from "@storage/meals/createNewMeals";
 
 export function NewMeal() {
   const { navigate } = useNavigation();
@@ -23,7 +26,7 @@ export function NewMeal() {
     navigate("home")
   }
 
-  function handleCreateNewMeal() {
+  async function handleCreateNewMeal() {
     if (
       name.trim().length === 0 ||
       description.trim().length === 0 ||
@@ -33,16 +36,27 @@ export function NewMeal() {
     ) {
       return Alert.alert("Nova Refeição", "Preencha todos os campos!");
     }
+    const newMeal: Meal = {
+      id: String(uuid.v4()),
+      date,
+      description,
+      hour,
+      isDiet: isDiet ? true : false,
+      name
+    }
 
-    console.log("Name =>", name);
-    console.log("Description =>", description);
-    console.log("Hour =>", hour);
-    console.log("Date =>", date);
-    console.log("Diet =>", isDiet);
+    try {
+      await createNewMeals(newMeal);
 
-    navigate("feedback", {
-      type: isDiet ? true : false
-    })
+      console.log(newMeal);
+      navigate("feedback", {
+        type: isDiet ? true : false
+      })
+
+    } catch (error) {
+      console.log(error);
+      Alert.alert("Nova Refeição", "Não foi possível criar adicionar uma nova refeição!");
+    }
   }
 
   return (
