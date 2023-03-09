@@ -1,7 +1,15 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { MEALS_COLLECTION, Meals } from '@storage/storageConfig';
+
+
 export async function getAllMeals() {
   try {
-    // pega todas as informações do async-storage, faz o parse com o Json e realiza o return
-  } catch (error) {
+    const storage = await AsyncStorage.getItem(MEALS_COLLECTION);
 
+    const meals: Meals[] = storage ? JSON.parse(storage) : [];
+
+    return meals;
+  } catch (error) {
+    throw error;
   }
 }
