@@ -48,7 +48,7 @@ export function NewMeal() {
     try {
       await createNewMeals(newMeal);
 
-      console.log(newMeal);
+      // console.log(newMeal);
       navigate("feedback", {
         type: isDiet ? true : false
       })
