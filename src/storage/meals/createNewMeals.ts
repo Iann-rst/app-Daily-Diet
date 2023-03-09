@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Meal, Meals, MEALS_COLLECTION } from "@storage/storageConfig";
 import { getAllMeals } from "./getAllMeals";
 
-export async function mealsCreate(newMeal: Meal) {
+export async function createNewMeals(newMeal: Meal) {
   try {
 
     const storedMeals = await getAllMeals();
