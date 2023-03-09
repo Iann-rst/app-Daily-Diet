@@ -9,6 +9,9 @@ export declare global {
       };
       feedback: {
         type: boolean;
+      };
+      editMeal: {
+        id: string;
       }
     }
   }
