@@ -1,7 +1,11 @@
 import { Button } from "@components/Button";
 import { SecondaryHeader } from "@components/SecondaryHeader";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { useEffect } from "react";
+import { getMealDetails } from "@storage/meals/getMealDetails";
+import { RemoveSpecificMeal } from "@storage/meals/removeSpecificMeal";
+import { Meal as MealProps, Meals } from "@storage/storageConfig";
+import { useEffect, useState } from "react";
+import { Alert } from "react-native";
 import { Container, Content, Description, Footer, Info, Meal, Name, Status, Tag, TagTitle, Timestamp, Title } from "./styles";
 
 type RouteParams = {
@@ -10,17 +14,45 @@ type RouteParams = {
 
 export function DetailsMeal() {
 
+  const [meal, setMeal] = useState<MealProps>();
   const route = useRoute();
   const { id } = route.params as RouteParams;
-
   const { navigate } = useNavigation();
 
   function handleBackHome() {
     navigate("home");
   }
 
-  function fetchDetailsMeal() {
-    console.log("Pegar os detalhes da refeição: ", id)
+  async function fetchDetailsMeal() {
+    // console.log("Pegar os detalhes da refeição: ", id)
+    try {
+      const response = await getMealDetails(id);
+      if (response) {
+        setMeal(response)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async function removeMeal() {
+    try {
+      await RemoveSpecificMeal(id, meal!.date);
+      navigate("home");
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async function handleRemoveMeal() {
+    Alert.alert(
+      'Remover',
+      'Deseja realmente excluir o registro da refeição?',
+      [
+        { text: 'Cancelar', style: 'cancel' },
+        { text: 'Sim, excluir', onPress: () => removeMeal() }
+      ]
+    )
   }
 
   useEffect(() => {
@@ -29,26 +61,26 @@ export function DetailsMeal() {
 
   return (
     <Container>
-      <SecondaryHeader title="Refeição" goBack={handleBackHome} type="IN" />
+      <SecondaryHeader title="Refeição" goBack={handleBackHome} type={meal?.isDiet ? "IN" : "OUT"} />
       <Content>
         <Meal>
-          <Name>Sanduíche</Name>
-          <Description>Sanduíche de pão integral com atum e salada de alface e tomate</Description>
+          <Name>{meal?.name}</Name>
+          <Description>{meal?.description}</Description>
         </Meal>
 
         <Timestamp>
           <Title>Data e hora</Title>
-          <Info>12/08/2022 às 16:00</Info>
+          <Info>{meal?.date} às {meal?.hour}</Info>
         </Timestamp>
 
         <Tag>
-          <Status type="IN" />
-          <TagTitle>dentro da dieta</TagTitle>
+          <Status type={meal?.isDiet ? "IN" : "OUT"} />
+          <TagTitle>{meal?.isDiet ? "dentro da dieta" : "fora da dieta"}</TagTitle>
         </Tag>
       </Content>
       <Footer>
         <Button icon="pencil" title="Editar refeição" />
-        <Button icon="trash" type="SECONDARY" title="Excluir refeição" />
+        <Button icon="trash" type="SECONDARY" title="Excluir refeição" onPress={handleRemoveMeal} />
       </Footer>
     </Container>
   )
