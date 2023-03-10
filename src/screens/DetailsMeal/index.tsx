@@ -2,7 +2,7 @@ import { Button } from "@components/Button";
 import { SecondaryHeader } from "@components/SecondaryHeader";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { getMealDetails } from "@storage/meals/getMealDetails";
-import { RemoveSpecificMeal } from "@storage/meals/removeSpecificMeal";
+import { removeSpecificMeal } from "@storage/meals/removeSpecificMeal";
 import { Meal as MealProps, Meals } from "@storage/storageConfig";
 import { useEffect, useState } from "react";
 import { Alert } from "react-native";
@@ -40,7 +40,7 @@ export function DetailsMeal() {
 
   async function removeMeal() {
     try {
-      await RemoveSpecificMeal(id, meal!.date);
+      await removeSpecificMeal(id, meal!.date);
       navigate("home");
     } catch (error) {
       console.log(error)

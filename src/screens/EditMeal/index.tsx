@@ -9,7 +9,7 @@ import { SecondaryHeader } from "@components/SecondaryHeader";
 
 import { Form, Content, LabelDiet, Container, Groups } from "./styles";
 import { getMealDetails } from "@storage/meals/getMealDetails";
-import { EditSpecificMeal } from "@storage/meals/editSpecificMeal";
+import { editSpecificMeal } from "@storage/meals/editSpecificMeal";
 import { Meal } from "@storage/storageConfig";
 
 type RouteParams = {
@@ -50,7 +50,7 @@ export function EditMeal() {
       name
     }
 
-    console.log(updateMeal)
+    await editSpecificMeal(updateMeal)
   }
 
   async function getMeal() {
