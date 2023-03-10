@@ -25,16 +25,28 @@ import { MealCard } from "@components/MealCard";
 
 import { getAllMeals } from "@storage/meals/getAllMeals";
 import { Meals } from "@storage/storageConfig";
+import { percentageFormatted } from "@utils/percentageFormatted";
 
-/* Fazer a FlatList para listar os dias e as refeições de cada dia */
 
 export function Home() {
   const { COLORS } = useTheme();
   const { navigate } = useNavigation();
 
-  const [meals, setMeals] = useState<Meals[]>([])
+  const [meals, setMeals] = useState<Meals[]>([]);
 
-  const onTheDiet = true;
+  const totalMeals = meals.reduce((total, meal) => {
+    return total + meal.data.length
+  }, 0);
+
+  const dietMeals = meals.reduce((total, meal) => {
+    return total + meal.data.filter(item => item.isDiet).length
+  }, 0);
+
+  const percentage = percentageFormatted(((dietMeals * 100) / totalMeals).toFixed(2))
+
+  const onTheDiet = Number(percentage) > 50 ? true : false;
+
+  /** Funções **/
 
   function handleShowStatistic() {
     navigate("statistic");
@@ -73,7 +85,9 @@ export function Home() {
         <StatCardButton onPress={handleShowStatistic}>
           <StatCardButtonIcon color={onTheDiet ? COLORS.GREEN_700 : COLORS.RED_700} />
         </StatCardButton>
-        <StatCardTitle>90,86%</StatCardTitle>
+        <StatCardTitle>
+          {percentage}%
+        </StatCardTitle>
         <StatCardSubTitle>das refeições dentro da dieta</StatCardSubTitle>
       </StatCard>
 
