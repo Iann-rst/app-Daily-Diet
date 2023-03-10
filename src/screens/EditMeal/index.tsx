@@ -50,7 +50,13 @@ export function EditMeal() {
       name
     }
 
-    await editSpecificMeal(updateMeal)
+    try {
+      await editSpecificMeal(updateMeal)
+      navigate("home")
+    } catch (error) {
+      console.log(error);
+      return Alert.alert("Editar Refeição", "Não foi possível realizar as alterações!");
+    }
   }
 
   async function getMeal() {
