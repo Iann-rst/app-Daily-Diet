@@ -55,7 +55,7 @@ export function NewMeal() {
 
     } catch (error) {
       console.log(error);
-      Alert.alert("Nova Refeição", "Não foi possível criar adicionar uma nova refeição!");
+      Alert.alert("Nova Refeição", "Não foi possível cadastrar uma nova refeição!");
     }
   }
 
