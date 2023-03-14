@@ -1,3 +1,4 @@
+import { sortMeals } from '@utils/sortMeals';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { MEALS_COLLECTION, Meals } from '@storage/storageConfig';
 
@@ -8,7 +9,7 @@ export async function getAllMeals() {
 
     const meals: Meals[] = storage ? JSON.parse(storage) : [];
 
-    return meals;
+    return sortMeals(meals);
   } catch (error) {
     throw error;
   }
