@@ -21,6 +21,7 @@ import AvatarImg from '@assets/avatar.png';
 import { Button } from "@components/Button";
 import { useTheme } from "styled-components/native";
 import { MealCard } from "@components/MealCard";
+import { ListEmpty } from "@components/ListEmpty";
 
 
 import { getAllMeals } from "@storage/meals/getAllMeals";
@@ -108,6 +109,7 @@ export function Home() {
         renderSectionHeader={({ section: { title } }) => (
           <TitleListMeals>{title}</TitleListMeals>
         )}
+        ListEmptyComponent={<ListEmpty message={`Ainda não tem nenhuma refeição cadastrada. ${'\n'} Que tal cadastrar sua primeira refeição?`} />}
         showsVerticalScrollIndicator={false}
       />
 
