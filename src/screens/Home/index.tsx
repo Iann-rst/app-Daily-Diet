@@ -109,7 +109,7 @@ export function Home() {
         renderSectionHeader={({ section: { title } }) => (
           <TitleListMeals>{title}</TitleListMeals>
         )}
-        ListEmptyComponent={<ListEmpty message={`Ainda não tem nenhuma refeição cadastrada. ${'\n'} Que tal cadastrar sua primeira refeição?`} />}
+        ListEmptyComponent={<ListEmpty message={`Você não tem nenhuma refeição cadastrada. ${'\n'} Que tal cadastrar sua primeira refeição?`} />}
         showsVerticalScrollIndicator={false}
       />
 
